@@ -4,7 +4,7 @@ A MEAN Stack Project Framework created with the intention of providing an adapta
 ### Development Environment
 This project was created and maintained using [Webstorm](www.jetbrains.com/webstorm) 2016.1 by JetBrains.
 
-I have included the `.idea` directory in this repository for the sake of this repository being focused on rapid development. It already has the best configuration for its own further development.
+I have included the `.idea` directory in this repository for the sake of it being focused on rapid development. It already has the best configuration for its own further development.
 
 ### Getting Started
 After downloading or cloning this repository, you should figure the rest out yourself.
