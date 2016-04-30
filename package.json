@@ -1,7 +1,7 @@
 {
   "name": "catasta",
   "version": "0.0.0",
-  "description": "MEAN Stack Project Framework",
+  "description": "NodeJS Project Framework",
   "author": "Tylor Stewart",
   "license": "GPL-3.0",
   "scripts": {

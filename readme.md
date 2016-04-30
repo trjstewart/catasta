@@ -1,5 +1,5 @@
 #Catasta
-A MEAN Stack Project Framework created with the intention of providing an adaptable platform for rapid development and deployment.
+A NodeJS Project Framework created with the intention of providing an adaptable platform for rapid development and deployment.
 
 ### Development Environment
 This project was created and maintained using [Webstorm](www.jetbrains.com/webstorm) 2016.1 by JetBrains.
