@@ -1,16 +1,5 @@
-# IntelliJ - User-Specific
-.idea/workspace.xml
-.idea/tasks.xml
-.idea/dictionaries
+# IDE Configuration
+.idea
 
-# IntelliJ - Sensitive or high-churn files
-.idea/dataSources.ids
-.idea/dataSources.xml
-.idea/sqlDataSources.xml
-.idea/dynamic.xml
-.idea/uiDesigner.xml
-
-# IntelliJ - Mongo Explorer plugin:
-.idea/mongoSettings.xml
-
-/node_modules
+# Node Packages
+node_modules
