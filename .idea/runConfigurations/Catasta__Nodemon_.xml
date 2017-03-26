@@ -1,9 +1,0 @@
-<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Catasta [Nodemon]" type="NodeJSConfigurationType" factoryName="Node.js" singleton="false" path-to-node="$USER_HOME$/AppData/Local/scoop/apps/nodejs/5.9.1/nodejs/nodemon.cmd" path-to-js-file="src/bin/www" working-dir="$PROJECT_DIR$">
-    <envs>
-      <env name="PORT" value="80" />
-    </envs>
-    <browser name="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" start="true" url="http://localhost/" />
-    <method />
-  </configuration>
-</component>
