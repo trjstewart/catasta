@@ -1,0 +1,25 @@
+{
+  "name": "Catasta",
+  "version": "0.0.0",
+  "description": "Catasta is a NodeJS Project Framework",
+  "repository": "https://github.com/trjstewart/catasta",
+  "author": "Tylor Stewart <trjstewart@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "npm run clean && npm run build:server",
+    "build:server": "babel src -d out",
+    "start": "npm run build && NODE_ENV=production forever out/index.js",
+    "start:dev": "NODE_ENV=development babel-node src/index.js"
+  },
+  "dependencies": {
+    "babel-cli": "^6.24.0",
+    "chalk": "^1.1.3",
+    "express": "^4.13.4",
+    "figlet": "^1.2.0"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-es2016": "^6.22.0",
+    "babel-preset-stage-0": "^6.22.0"
+  }
+}
