@@ -1,5 +1,6 @@
 'use strict';
 import bcrypt from 'bcryptjs';
+import email from '../../helpers/email';
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
@@ -10,8 +11,13 @@ module.exports = (sequelize, DataTypes) => {
     password: { type: DataTypes.STRING, required: true, allowNull: false },
   });
 
-  User.beforeValidate((user) => {
+  User.beforeCreate(user => {
     user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10));
+  });
+  
+  User.afterValidate(user => {
+    if (user.changed('email')) email.verifyEmail(user.id);
+    if (user.changed('password')) user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10));
   });
 
   return User;

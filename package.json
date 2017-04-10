@@ -25,9 +25,11 @@
     "favicon": "^0.0.2",
     "figlet": "^1.2.0",
     "morgan": "^1.8.1",
+    "node-ses": "^2.0.5",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "pg": "^6.1.5",
+    "pg-hstore": "^2.3.2",
     "pug": "^2.0.0-beta11",
     "sequelize": "^3.30.4",
     "sequelize-cli": "^2.7.0"
