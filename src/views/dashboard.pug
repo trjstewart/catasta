@@ -18,7 +18,7 @@ block content
             option(value='basketball') Basketball
             option(value='boxing') Boxing
             option(value='cricket') Cricket
-            option(value='dance') Dance (Specify)
+            option(value='dance') Dance
             option(value='fencing') Fencing
             option(value='football') Football (Soccer)
             option(value='futsal') Futsal
@@ -53,7 +53,6 @@ block content
             option(value='brisbane-west') West Brisbane
             option(value='sunshine-coast') Sunshine Coast
             option(value='gold-coast') Gold Coast
-
         .field
           label Blue Card Holder
           select.ui.dropdown
@@ -73,13 +72,13 @@ block content
             label Day
             select.ui.search.dropdown#time-day-day
               option(value='') Day
-              option(value='monday') Monday
-              option(value='tuesday') Tuesday
-              option(value='wednesday') Wednesday
-              option(value='thursday') Thursday
-              option(value='friday') Friday
-              option(value='saturday') Saturday
-              option(value='sunday') Sunday
+              option(value='Monday') Monday
+              option(value='Tuesday') Tuesday
+              option(value='Wednesday') Wednesday
+              option(value='Thursday') Thursday
+              option(value='Friday') Friday
+              option(value='Saturday') Saturday
+              option(value='Sunday') Sunday
           .four.wide.field
             label Start
             .ui.calendar#time-day-start
@@ -96,9 +95,12 @@ block content
                 input(type='text', placeholder='Time')
           .three.wide.field
             label &nbsp;
-            button.ui.labeled.icon.button.green.fluid
+            button.ui.labeled.icon.button.green.fluid(onclick="addTimeSlot()")
               i.plus.icon
               | Add
+        .field
+        .ui.negative.message#time-day-error(hidden=true)
+          p Please select a day, start, and end to add to your search.
 
       table.ui.blue.table#day-time-table(hidden=true)
         thead
@@ -107,16 +109,16 @@ block content
             th.twelve.wide Available
             th.two.wide Delete
         tbody
-          tr
-            td Monday
-            td 1PM - 3PM
-
       .field
         button.ui.button.blue.fluid(type='search') Search
       .ui.error.message
 
   script.
     $(document).ready(function () {
+      // Enable Calanders
+      $('#time-day-start').calendar({ type: 'time' });
+      $('#time-day-end').calendar({ type: 'time' });
+
       $('.ui.form').form({
         fields: {
           name: {
@@ -138,5 +140,24 @@ block content
     // Show / Hide Time Selection
     $('#time-day-search-toggle').change(function () {
       $('#day-time-add').attr('hidden', !this.checked);
-      $('#day-time-table').attr('hidden', !this.checked);
     });
+
+    // Time Search Functionality
+    var dayTimes = { Monday: [], Tuesday: [], Wednesday: [], Thursday: [], Friday: [], Saturday: [], Sunday: [] };
+
+    function addTimeSlot() {
+      var day = $('#time-day-day').val();
+      var start = $('#time-day-start input').val();
+      var end = $('#time-day-end input').val();
+
+      // new Date(2010, 12, 21, 9, 30, 0, 0), // today 9:30:00:000
+
+      if (day !== '' && start !== '' && end !== '') {
+        var newRow = '<tr><td>' + day + '</td><td>' + start + ' - ' + end + '</td><td>&nbsp;</td></tr>';
+        $('#day-time-table > tbody:last-child').append(newRow);
+        $('#time-day-error').attr('hidden', true);
+        $('#day-time-table').attr('hidden', false);
+      } else {
+        $('#time-day-error').attr('hidden', false);
+      }
+    }

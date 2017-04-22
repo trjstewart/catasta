@@ -1,0 +1,39 @@
+extends partials/layout
+
+block content
+  .ui.container
+
+    h2 Stripe Checkout
+    #shop
+      button#buttonCheckout Checkout
+
+    script.
+      var checkoutHandler = StripeCheckout.configure({
+        key: "pk_test_WdXgF4QuYrqDjwzZUxpd7ucI",
+        locale: "auto"
+      });
+
+      var button = document.getElementById("buttonCheckout");
+      button.addEventListener("click", function(ev) {
+        checkoutHandler.open({
+          name: "Sports Connection",
+          description: "1 Year Subscription",
+          token: handleToken
+        });
+      });
+
+      function handleToken(token) {
+        fetch("/charge", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify(token)
+        })
+        .then(response => response.json())
+        .then(output => {
+          console.log('output is being processed...')
+          console.log(output)
+          console.log(JSON.stringify(output, null, 2))
+          if (output.status === "succeeded")
+            document.getElementById("shop").innerHTML = "<p>Purhcase complete!</p>";
+        })
+      }

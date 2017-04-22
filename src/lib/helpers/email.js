@@ -8,8 +8,8 @@ const verifyEmail = (id) => {
   client.sendEmail({
     to: 'trjstewart@gmail.com',
     from: 'demo@binaryorange.co',
-    subject: 'Catasta - Verify Email Address',
-    message: `Welcome to Catasta. Please click on the link below to verify your email address.<br>http://google.com`,
+    subject: 'Sports Connection - Verify Email Address',
+    message: `Welcome to Sports Connection. Please click on the link below to verify your email address.<br>http://google.com`,
   }, (err) => {
     if (err) console.log(chalk.red(`${chalk.yellow(`>>>`)} There was an error sending the verification email.\n`), JSON.stringify(err, null, 2));
   });
