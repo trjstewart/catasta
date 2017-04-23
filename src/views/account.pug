@@ -1,0 +1,69 @@
+extends partials/layout
+
+block content
+  .ui.text.container
+    //- Change Password
+    h3.ui.dividing.header Change Password
+    form.ui.form#password(method='post' action='')
+      .three.fields
+        .six.wide.field
+          label Password
+          input(type='text', name='password', placeholder='Password')
+        .six.wide.field
+          label Confirm Password
+          input(type='text', name='repeat', placeholder='Confirm Password')
+        .four.wide.field
+          label &nbsp;
+          button.ui.labeled.icon.button.blue.fluid
+            i.lock.icon
+            | Save
+
+    //- Update Email Address
+    h3.ui.dividing.header Update Email Address
+    form.ui.form#email(method='post' action='')
+      .three.fields
+        .six.wide.field
+          label Email Address
+          input(type='text', name='email', placeholder='Email Address')
+        .six.wide.field
+          label Confirm Email Address
+          input(type='text', name='repeat', placeholder='Confirm Email Address')
+        .four.wide.field
+          label &nbsp;
+          button.ui.labeled.icon.button.blue.fluid
+            i.mail.icon
+            | Update
+
+    //- Manage Subscription
+    h3.ui.dividing.header Manage Subscription
+    p You don't currently have an active subscription.
+    #shop
+      button.ui.labeled.icon.button.blue.fluid#buttonCheckout Purchase 1 Year Subscription
+
+    script.
+      var checkoutHandler = StripeCheckout.configure({ key: "pk_test_WdXgF4QuYrqDjwzZUxpd7ucI", locale: "auto" });
+
+      var button = document.getElementById("buttonCheckout");
+      button.addEventListener("click", function(ev) {
+        checkoutHandler.open({
+          name: "Sports Connection",
+          description: "1 Year Subscription",
+          token: handleToken
+        });
+      });
+
+      function handleToken(token) {
+        fetch("/charge", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify(token)
+        })
+        .then(response => response.json())
+        .then(output => {
+          console.log('output is being processed...')
+          console.log(output)
+          console.log(JSON.stringify(output, null, 2))
+          if (output.status === "succeeded")
+            document.getElementById("shop").innerHTML = "<p>Purhcase complete!</p>";
+        })
+      }

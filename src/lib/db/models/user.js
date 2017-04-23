@@ -8,7 +8,16 @@ module.exports = (sequelize, DataTypes) => {
     firstName: { type: DataTypes.STRING, required: true, allowNull: false },
     lastName: { type: DataTypes.STRING, required: true, allowNull: false },
     email: { type: DataTypes.STRING, unique: true, required: true, allowNull: false },
+    verified: { type: DataTypes.BOOLEAN, required: true, allowNull: false, defaultValue: false },
     password: { type: DataTypes.STRING, required: true, allowNull: false },
+    type: { type: DataTypes.ENUM('individual', 'organization'), required: true, allowNull: false },
+    subscription: { type: DataTypes.DATE, required: true, defaultValue: null },
+  }, {
+    classMethods: {
+      associate(models) {
+        User.hasOne(models.Profile, { foreignKey: 'user', onUpdate: 'cascade', onDelete: 'cascade' });
+      },
+    },
   });
 
   User.beforeCreate(user => {

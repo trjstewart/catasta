@@ -2,12 +2,51 @@ extends partials/layout
 
 block content
   .ui.text.container
-    form.ui.form#search(method='post' action='')
-      h2.ui.dividing.header Search for Candidates
+    //- Profile Information
+    form.ui.form#profile(method='post' action='')
+      //- Personal Information Entry
+      h3.ui.dividing.header Personal Information
       .two.fields
         .field
-          label Keywords
-          input(type='text', name='keywords', placeholder='Keywords')
+          label First Name
+          input(type='text', name='first', placeholder='First Name')
+        .field
+          label Last Name
+          input(type='text', name='last', placeholder='Last Name')
+      .three.fields
+        .field
+          label Gender
+          select.ui.fluid.search.dropdown(name='type')
+            option(value='') Gender
+            option(value='male') Male
+            option(value='female') Female
+        .field
+          label Location
+          select.ui.search.dropdown(name='location')
+            option(value='') Location
+            option(value='brisbane-central') Central Brisbane
+            option(value='brisbane-north') North Brisbane
+            option(value='brisbane-south') South Brisbane
+            option(value='brisbane-east') East Brisbane
+            option(value='brisbane-west') West Brisbane
+            option(value='sunshine-coast') Sunshine Coast
+            option(value='gold-coast') Gold Coast
+        .field
+          label Phone
+          input(type='text', name='phone', placeholder='Phone')
+
+      
+      //- Additional Information Entry
+      h3.ui.dividing.header Additional Information
+      .three.fields
+        .field
+          label Type
+          select.ui.fluid.search.dropdown(name='type', multiple='')
+            option(value='') Type
+            option(value='Coach') Coach
+            option(value='Umpire/Referee') Umpire/Referee
+            option(value='Sports Instructor') Sports Instructor
+            option(value='Sports Medicine') Sports Medicine
         .field
           label Sports
           select.ui.fluid.search.dropdown(name='sports', multiple='')
@@ -41,25 +80,19 @@ block content
             option(value='yoga') Yoga
             option(value='zumba') Zumba
             option(value='other') Other
-      .two.fields
-        .field
-          label Location
-          select.ui.search.dropdown(name='location')
-            option(value='') Location
-            option(value='brisbane-central') Central Brisbane
-            option(value='brisbane-north') North Brisbane
-            option(value='brisbane-south') South Brisbane
-            option(value='brisbane-east') East Brisbane
-            option(value='brisbane-west') West Brisbane
-            option(value='sunshine-coast') Sunshine Coast
-            option(value='gold-coast') Gold Coast
         .field
           label Blue Card Holder
           select.ui.dropdown(name='bluecard')
             option(value='') Blue Card Holder
             option(value='yes') Yes
+            option(value='pending') Pending
             option(value='no') No
-
+      .field
+        label Experience and Qualifications
+        textarea(name='experience', placeholder='Experience and Qualifications')
+      
+      //- Available Times Entry
+      h3.ui.dividing.header Available Times
       #day-time-add
         input#daytimes(type='hidden', name='daytimes')
         .fields
@@ -96,7 +129,6 @@ block content
       .field
       .ui.negative.message#time-day-error(hidden=true)
         p Please select a day, start, and end to add to your search.
-
       table.ui.blue.table#day-time-table(hidden=true)
         thead
           tr
@@ -105,7 +137,7 @@ block content
             th.two.wide Delete
         tbody
       .field
-        button.ui.button.blue.fluid(type='search') Search
+        button.ui.button.blue.fluid Save
       .ui.error.message
 
   script.
