@@ -1,0 +1,10 @@
+extends partials/layout
+
+block content
+  .ui.text.container
+    if success.length != 0
+      .field.ui.positive.message=success
+    if info.length != 0
+      .field.ui.warning.message=info
+    if error.length != 0
+      .field.ui.negative.message=error

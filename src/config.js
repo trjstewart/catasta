@@ -1,4 +1,9 @@
 export default {
+  application: {
+    name: 'Sports Connection',
+    domain: 'localhost:3000',
+    email: 'demo@binaryorange.co',
+  },
   database: {
     url: process.env.DATABASE_URL,
   },

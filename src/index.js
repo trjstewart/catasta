@@ -5,11 +5,11 @@ import fs from 'fs';
 import path from 'path';
 
 // Import Externals
-import bodyParser from'body-parser';
+import bodyParser from 'body-parser';
 import chalk from 'chalk';
 import dotenv from 'dotenv';
 import flash from 'connect-flash';
-import cookieParser  from'cookie-parser';
+import cookieParser  from 'cookie-parser';
 import express from 'express';
 import expressValidator from 'express-validator';
 import session from 'express-session';
@@ -35,9 +35,9 @@ app.set('view engine', 'pug');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cookieParser('keyboard cat'));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({ secret: 'super-secret-string', saveUninitialized: true, resave: true }));
+app.use(session({ secret: 'super-secret-string', saveUninitialized: true, resave: true, key: 'sid', cookie: { maxAge: 60000 } }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
@@ -49,8 +49,8 @@ app.use(expressValidator({
 	}
 }));
 app.use(function (req, res, next) {
-  res.locals.success_msg = req.flash('success_msg');
-  res.locals.error_msg = req.flash('error_msg');
+  res.locals.success = req.flash('success');
+  res.locals.info = req.flash('info');
   res.locals.error = req.flash('error');
   res.locals.user = req.user || null;
   next();

@@ -11,6 +11,7 @@ module.exports = {
     type: { type: Sequelize.ENUM('individual', 'organization'), required: true, allowNull: false },
     subscription: { type: Sequelize.DATE, required: true, defaultValue: null },
     stripe: { type: Sequelize.STRING },
+    metadata: { type: Sequelize.JSON },
     createdAt: { type: Sequelize.DATE, required: true, allowNull: false },
     updatedAt: { type: Sequelize.DATE, required: true, allowNull: false },
   }),

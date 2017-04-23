@@ -2,21 +2,64 @@ extends partials/layout
 
 block content
   style(type='text/css').
-    body {
-      background-color: #37657B;
-    }
+    body { background-color: #37657B; }
+    body > .grid { height: 100%; }
+    .image { margin-top: -100px; }
+    .column { max-width: 450px; }
 
-    body > .grid {
-      height: 100%;
-    }
+  .ui.middle.aligned.center.aligned.grid
+    .column
+      form.ui.large.form(method="post" action="/register")
+        input(type='hidden', name='type', value=type)
+        .ui.stacked.segment
+          h2.ui.teal.image.header
+            .content
+              | Register your account
+          if errors
+            each error in errors
+              .ui.negative.message
+                p=error
+          .field
+            .ui.left.icon.input
+              i.user.icon
+              input(type='text', name='firstName', value=firstName, placeholder='First Name')
+          .field
+            .ui.left.icon.input
+              i.user.icon
+              if !retryLastName
+                input(type='text', name='lastName', placeholder='Last Name')
+              else
+                input(type='text', name='lastName', value=retryLastName)
+          .field
+            .ui.left.icon.input
+              i.mail.icon
+              if !retryEmail
+                input(type='text', name='email', placeholder='E-mail address')
+              else
+                input(type='text', name='email', value=retryEmail)
+          .field
+            .ui.left.icon.input
+              i.lock.icon
+              input(type='password', name='password', placeholder='Password')
+          .field
+            .ui.left.icon.input
+              i.lock.icon
+              input(type='password', name='passwordv', placeholder='Confirm Password')
+          .field
+            .ui.fluid.large.teal.submit.button Register as an #{type[0].toUpperCase() + type.substring(1)}
+          .field
+            p Not an #{type[0].toUpperCase() + type.substring(1)}? 
+              | Click <a href="/register?type=#{(type === 'individual') ? 'organization' : 'individual'}">here</a> to Register as an 
+              | #{(type === 'individual') ? 'Organization' : 'Individual'}.
+        .ui.error.message
+      .ui.message
+        | Already have an account?
+        a(href='/login')  Login
 
-    .image {
-      margin-top: -100px;
-    }
 
-    .column {
-      max-width: 450px;
-    }
+
+
+
 
   script.
     $(document).ready(function () {
@@ -58,55 +101,3 @@ block content
         }
       });
     });
-
-  .ui.container
-    if success
-      .ui.positive.message
-        p=success
-
-    if errors
-      each error in errors
-        .ui.negative.message
-          p=error
-
-  .ui.middle.aligned.center.aligned.grid
-    .column
-      form.ui.large.form(method="post" action="/register")
-        .ui.stacked.segment
-          h2.ui.teal.image.header
-            .content
-              | Register your account
-          .field
-            .ui.left.icon.input
-              i.user.icon
-              if !retryFirstName
-                input(type='text', name='reg_firstName', placeholder='First Name')
-              else
-                input(type='text', name='reg_firstName', value=retryFirstName)
-          .field
-            .ui.left.icon.input
-              i.user.icon
-              if !retryLastName
-                input(type='text', name='reg_lastName', placeholder='Last Name')
-              else
-                input(type='text', name='reg_lastName', value=retryLastName)
-          .field
-            .ui.left.icon.input
-              i.mail.icon
-              if !retryEmail
-                input(type='text', name='reg_email', placeholder='E-mail address')
-              else
-                input(type='text', name='reg_email', value=retryEmail)
-          .field
-            .ui.left.icon.input
-              i.lock.icon
-              input(type='password', name='reg_password', placeholder='Password')
-          .field
-            .ui.left.icon.input
-              i.lock.icon
-              input(type='password', name='reg_passwordv', placeholder='Confirm Password')
-          .ui.fluid.large.teal.submit.button Register
-        .ui.error.message
-      .ui.message
-        | Already have an account?
-        a(href='/login')  Login

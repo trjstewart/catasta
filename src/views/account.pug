@@ -20,7 +20,21 @@ block content
 
     //- Update Email Address
     h3.ui.dividing.header Update Email Address
-    form.ui.form#email(method='post' action='')
+    form.ui.form#email-validate(method='post' action='')
+      .two.fields
+        .twelve.wide.field
+          label Email Verification
+          if !user.verified
+            span Your email address '#{user.email}' hasn't been verified yet.
+          else
+            span Your email address '#{user.email}' has already been verified.
+        .four.wide.field
+            label &nbsp;
+            if !user.verified
+              button.ui.labeled.icon.button.blue.fluid(onclick)
+                i.send.icon
+                | Resend
+    form.ui.form#email-change(method='post' action='')
       .three.fields
         .six.wide.field
           label Email Address

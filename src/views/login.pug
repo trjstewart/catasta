@@ -40,16 +40,6 @@ block content
       });
     });
 
-  .ui.container
-    if success
-      .ui.positive.message
-        p=success
-
-    if errors
-      each error in errors
-        .ui.negative.message
-          p=error
-
   .ui.middle.aligned.center.aligned.grid
     .column
       form.ui.large.form(method="post" action="/login")
@@ -57,6 +47,12 @@ block content
           h2.ui.teal.image.header
             .content
               | Login to your account
+          if success.length != 0
+            .field.ui.positive.message=success
+          if info.length != 0
+            .field.ui.warning.message=info
+          if error.length != 0
+            .field.ui.negative.message=error
           .field
             .ui.left.icon.input
               i.user.icon

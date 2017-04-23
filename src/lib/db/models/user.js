@@ -12,6 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     password: { type: DataTypes.STRING, required: true, allowNull: false },
     type: { type: DataTypes.ENUM('individual', 'organization'), required: true, allowNull: false },
     subscription: { type: DataTypes.DATE, required: true, defaultValue: null },
+    stripe: { type: DataTypes.STRING },
+    metadata: { type: DataTypes.JSON },
   }, {
     classMethods: {
       associate(models) {
@@ -19,13 +21,9 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
   });
-
-  User.beforeCreate(user => {
-    user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10));
-  });
   
   User.afterValidate(user => {
-    if (user.changed('email')) email.verifyEmail(user.id);
+    if (user.changed('email')) email.verifyEmail(user.email);
     if (user.changed('password')) user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10));
   });
 
