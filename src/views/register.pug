@@ -35,6 +35,15 @@ block content
               i.lock.icon
               input(type='password', name='passwordv', placeholder='Confirm Password')
           .field
+            .ui.checkbox
+              input(type='checkbox', name='tnc')
+              |  
+              if (type === 'individual')
+                label I agree to the SportsConnection <a href='files/Sport-Facilitator-Registration-Terms.pdf' target="_blank">terms and conditions</a>.
+              if (type === 'organisation')
+                label I agree to the SportsConnection <a href='files/Sporting-Organisation-Registration-Terms.pdf' target="_blank">terms and conditions</a>.
+
+          .field
             .ui.fluid.large.sc-gold-button.submit.button Register as an #{type[0].toUpperCase() + type.substring(1)}
           .field
             p Not an #{type[0].toUpperCase() + type.substring(1)}? 
