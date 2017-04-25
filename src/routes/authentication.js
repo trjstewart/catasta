@@ -26,15 +26,13 @@ module.exports = (app) => {
   // [POST] Registration Request
   app.post('/register', async (req, res) => {
     // Sanitization
-    const form = ['firstName', 'lastName', 'email', 'password', 'passwordv'];
+    const form = ['email', 'password', 'passwordv'];
     for (let i = 0; i < form.length; i += 1) {
       req.sanitize(form[i]).escape();
       req.sanitize(form[i]).trim();
     }
     
     // Sanitise and Validate all Form Inputs
-    req.checkBody('firstName', 'Please Enter Your First Name').notEmpty();
-    req.checkBody('lastName', 'Please Enter Your Last Name').notEmpty();
     req.checkBody('email', 'Please Enter Your Email').notEmpty();
     req.checkBody('password', 'Please Enter Both Password Fields').notEmpty();
     req.checkBody('passwordv', 'Please Enter Both Password Fields').notEmpty();
@@ -67,30 +65,6 @@ module.exports = (app) => {
       }
     }
   });
-
-  // passport.use(new LocalStrategy(
-  //   function(username, password, done) {
-  //    User.getUserByUsername(username, function(err, user){
-  //    	if(err) throw err;
-  //    	if(!user){
-  //    		return done(null, false, {message: 'Unknown User'});
-  //    	}
-  
-  //    	User.comparePassword(password, user.password, function(err, isMatch){
-  //    		if(err) throw err;
-  //    		if(isMatch){
-  //    			return done(null, user);
-  //    		} else {
-  //    			return done(null, false, {message: 'Invalid password'});
-  //    		}
-  //    	});
-  //    });
-  //   }));
-
-  // passport.use(new LocalStrategy((username, password, done) => {
-  //   const user = { id: 1234, firstName: 'Tylor', lastName: 'Stewart' };
-  //   return done(null, user);
-  // }));
 
   passport.use(new LocalStrategy(async (username, password, done) => {
     // Check if the user exists.

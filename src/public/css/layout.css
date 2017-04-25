@@ -1,3 +1,12 @@
 body {
-    padding-top: 75px;
+    padding-top: 85px;
+}
+
+.sc-gold-button {
+    background-color: #c9ad49 !important;
+    color: #fff !important;
+}
+
+.sc-gold-text {
+    color: #c9ad49 !important;
 }

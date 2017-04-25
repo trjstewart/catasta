@@ -3,7 +3,7 @@ extends partials/layout
 block content
   style(type='text/css').
     body {
-      background-color: #37657B;
+      background-color: #011849;
     }
 
     body > .grid {
@@ -44,7 +44,7 @@ block content
     .column
       form.ui.large.form(method="post" action="/login")
         .ui.stacked.segment
-          h2.ui.teal.image.header
+          h2.ui.sc-gold-text.image.header
             .content
               | Login to your account
           if success.length != 0
@@ -64,7 +64,7 @@ block content
             .ui.left.icon.input
               i.lock.icon
               input(type='password', name='password', placeholder='Password')
-          .ui.fluid.large.teal.submit.button Login
+          .ui.fluid.large.sc-gold-button.submit.button Login
         .ui.error.message
       .ui.message
         | New to Sports Connection?

@@ -5,12 +5,11 @@ import email from '../../helpers/email';
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     id: { type: DataTypes.UUID, primaryKey: true, defaultValue: DataTypes.UUIDV4 },
-    firstName: { type: DataTypes.STRING, required: true, allowNull: false },
-    lastName: { type: DataTypes.STRING, required: true, allowNull: false },
     email: { type: DataTypes.STRING, unique: true, required: true, allowNull: false },
-    verified: { type: DataTypes.BOOLEAN, required: true, allowNull: false, defaultValue: false },
     password: { type: DataTypes.STRING, required: true, allowNull: false },
+    verified: { type: DataTypes.BOOLEAN, required: true, allowNull: false, defaultValue: false },
     type: { type: DataTypes.ENUM('individual', 'organization'), required: true, allowNull: false },
+    profile: { type: DataTypes.JSON },
     subscription: { type: DataTypes.DATE, required: true, defaultValue: null },
     stripe: { type: DataTypes.STRING },
     metadata: { type: DataTypes.JSON },

@@ -1,6 +1,6 @@
 html
   head
-    title Catasta
+    title SportsConnection
 
     meta(charset='utf-8')
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
@@ -18,23 +18,23 @@ html
   body
     .ui.top.fixed.borderless.main.menu
       .ui.container
-        img(src='/img/logo.png').item
-        a(href='/dashboard').item Dashboard
+        a(href='/')
+          img(src='/img/logo.png').item
+        if (user && user.type === 'organization')
+          a(href='/dashboard').item
+            i.search.icon
+            | Search for Candidates
         .right.menu
           if user
-            .ui.dropdown.item
-              | #{user.firstName} #{user.lastName}
-              i.dropdown.icon
-              .menu
-                a(href='/account').item
-                  i.user.icon
-                  | Account
-                a(href='/profile').item
-                  i.write.icon
-                  | Profile
-                a(href='/logout').item
-                  i.sign.out.icon
-                  | Logout
+            a(href='/profile').item
+              i.write.icon
+              | Edit Profile
+            a(href='/account').item
+              i.user.icon
+              | Account
+            a(href='/logout').item
+              i.sign.out.icon
+              | Logout
           else
             a(href='/register').item Register
             a(href='/login').item Login

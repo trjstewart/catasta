@@ -3,6 +3,8 @@
 module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.createTable('Profiles', {
     user: { type: Sequelize.UUID, primaryKey: true, defaultValue: Sequelize.UUIDV4 },
+    firstName: { type: Sequelize.STRING },
+    lastName: { type: Sequelize.STRING },
     gender: { type: Sequelize.ENUM('male', 'female') },
     location: { type: Sequelize.STRING },
     phone: { type: Sequelize.STRING },

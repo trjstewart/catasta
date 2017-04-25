@@ -2,7 +2,7 @@ extends partials/layout
 
 block content
   style(type='text/css').
-    body { background-color: #37657B; }
+    body { background-color: #011849; }
     body > .grid { height: 100%; }
     .image { margin-top: -100px; }
     .column { max-width: 450px; }
@@ -12,24 +12,13 @@ block content
       form.ui.large.form(method="post" action="/register")
         input(type='hidden', name='type', value=type)
         .ui.stacked.segment
-          h2.ui.teal.image.header
+          h2.ui.sc-gold-text.image.header
             .content
               | Register your account
           if errors
             each error in errors
               .ui.negative.message
                 p=error
-          .field
-            .ui.left.icon.input
-              i.user.icon
-              input(type='text', name='firstName', value=firstName, placeholder='First Name')
-          .field
-            .ui.left.icon.input
-              i.user.icon
-              if !retryLastName
-                input(type='text', name='lastName', placeholder='Last Name')
-              else
-                input(type='text', name='lastName', value=retryLastName)
           .field
             .ui.left.icon.input
               i.mail.icon
@@ -46,11 +35,11 @@ block content
               i.lock.icon
               input(type='password', name='passwordv', placeholder='Confirm Password')
           .field
-            .ui.fluid.large.teal.submit.button Register as an #{type[0].toUpperCase() + type.substring(1)}
+            .ui.fluid.large.sc-gold-button.submit.button Register as an #{type[0].toUpperCase() + type.substring(1)}
           .field
             p Not an #{type[0].toUpperCase() + type.substring(1)}? 
-              | Click <a href="/register?type=#{(type === 'individual') ? 'organization' : 'individual'}">here</a> to Register as an 
-              | #{(type === 'individual') ? 'Organization' : 'Individual'}.
+              | Click <a href="/register?type=#{(type === 'individual') ? 'organisation' : 'individual'}">here</a> to Register as an 
+              | #{(type === 'individual') ? 'Organisation' : 'Individual'}.
         .ui.error.message
       .ui.message
         | Already have an account?

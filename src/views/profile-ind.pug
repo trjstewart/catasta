@@ -2,6 +2,13 @@ extends partials/layout
 
 block content
   .ui.text.container
+    if success.length != 0
+      .field.ui.positive.message=success
+    if info.length != 0
+      .field.ui.warning.message=info
+    if error.length != 0
+      .field.ui.negative.message=error
+
     //- Profile Information
     form.ui.form#profile(method='post' action='')
       //- Personal Information Entry
@@ -9,39 +16,38 @@ block content
       .two.fields
         .field
           label First Name
-          input(type='text', name='first', placeholder='First Name')
+          input(type='text', name='first', placeholder='First Name', value=(user.profile) ? user.profile.first: null)
         .field
           label Last Name
-          input(type='text', name='last', placeholder='Last Name')
+          input(type='text', name='last', placeholder='Last Name', value=(user.profile) ? user.profile.last: null)
       .three.fields
         .field
           label Gender
-          select.ui.fluid.search.dropdown(name='type')
+          select.ui.fluid.search.dropdown(name='gender')
             option(value='') Gender
-            option(value='male') Male
-            option(value='female') Female
+            option(value='male' selected=(user.profile && user.profile.gender === 'male')) Male
+            option(value='female' selected=(user.profile && user.profile.gender === 'female')) Female
         .field
           label Location
           select.ui.search.dropdown(name='location')
             option(value='') Location
-            option(value='brisbane-central') Central Brisbane
-            option(value='brisbane-north') North Brisbane
-            option(value='brisbane-south') South Brisbane
-            option(value='brisbane-east') East Brisbane
-            option(value='brisbane-west') West Brisbane
-            option(value='sunshine-coast') Sunshine Coast
-            option(value='gold-coast') Gold Coast
+            option(value='brisbane-central' selected=(user.profile && user.profile.location === 'brisbane-central')) Central Brisbane
+            option(value='brisbane-north' selected=(user.profile && user.profile.location === 'brisbane-north')) North Brisbane
+            option(value='brisbane-south' selected=(user.profile && user.profile.location === 'brisbane-south')) South Brisbane
+            option(value='brisbane-east' selected=(user.profile && user.profile.location === 'brisbane-east')) East Brisbane
+            option(value='brisbane-west' selected=(user.profile && user.profile.location === 'brisbane-west')) West Brisbane
+            option(value='sunshine-coast' selected=(user.profile && user.profile.location === 'sunshine-coast')) Sunshine Coast
+            option(value='gold-coast' selected=(user.profile && user.profile.location === 'gold-coast')) Gold Coast
         .field
           label Phone
-          input(type='text', name='phone', placeholder='Phone')
-
+          input(type='text', name='phone', placeholder='Phone', value=(user.profile) ? user.profile.phone: null)
       
       //- Additional Information Entry
       h3.ui.dividing.header Additional Information
       .three.fields
         .field
           label Type
-          select.ui.fluid.search.dropdown(name='type', multiple='')
+          select.ui.fluid.search.dropdown#type(name='type', multiple='')
             option(value='') Type
             option(value='Coach') Coach
             option(value='Umpire/Referee') Umpire/Referee
@@ -49,7 +55,7 @@ block content
             option(value='Sports Medicine') Sports Medicine
         .field
           label Sports
-          select.ui.fluid.search.dropdown(name='sports', multiple='')
+          select.ui.fluid.search.dropdown#sports(name='sports', multiple='')
             option(value='') Sports
             option(value='athletics') Athletics
             option(value='afl') AFL
@@ -84,12 +90,12 @@ block content
           label Blue Card Holder
           select.ui.dropdown(name='bluecard')
             option(value='') Blue Card Holder
-            option(value='yes') Yes
-            option(value='pending') Pending
-            option(value='no') No
+            option(value='yes' selected=(user.profile && user.profile.bluecard === 'yes')) Yes
+            option(value='pending' selected=(user.profile && user.profile.bluecard === 'pending')) Pending
+            option(value='no' selected=(user.profile && user.profile.bluecard === 'no')) No
       .field
         label Experience and Qualifications
-        textarea(name='experience', placeholder='Experience and Qualifications')
+        textarea(name='experience', placeholder='Experience and Qualifications')=(user.profile) ? user.profile.experience: null
       
       //- Available Times Entry
       h3.ui.dividing.header Available Times
@@ -134,11 +140,17 @@ block content
           tr
             th.three.wide Day
             th.twelve.wide Available
-            th.two.wide Delete
         tbody
       .field
         button.ui.button.blue.fluid Save
       .ui.error.message
+
+  if user.profile
+    script.
+      $(document).ready(function () {
+        $('#type').dropdown('set selected', '#{user.profile.type}'.split(','));
+        $('#sports').dropdown('set selected', '#{user.profile.sports}'.split(','));
+      });
 
   script.
     $(document).ready(function () {
@@ -160,7 +172,7 @@ block content
         // Could also write logic to add times for an existing day to the existing row rather than adding a new row.
 
         // Add to the Table.
-        var newRow = '<tr><td>' + day + '</td><td>' + start + ' - ' + end + '</td><td>&nbsp;</td></tr>';
+        var newRow = '<tr><td>' + day + '</td><td>' + start + ' - ' + end + '</td></tr>';
         $('#day-time-table > tbody:last-child').append(newRow);
 
         // Add to the DataStore.
@@ -177,7 +189,7 @@ block content
     }
 
     // Search Form Submit
-    $('#search').submit(function(form) {
+    $('#profile').submit(function(form) {
       //- form.preventDefault(); // Debugging
       
       // Add the dayTimes data to the form before it's submitted.

@@ -25,8 +25,10 @@ const verifyEmail = async (email) => {
         subject: `${config.application.name} - Verify Email Address`,
         message: `Welcome to ${config.application.name}. Please click on the link below to verify your email address.
           <br>http://${config.application.domain}/validate/${metadata.verifyEmail.token}`,
-      }, (err) => {
+      }, (err, data, res) => {
         if (err) console.log(chalk.red(`${chalk.yellow(`>>>`)} There was an error sending the verification email.\n`), JSON.stringify(err, null, 2));
+        console.log(chalk.green(`${chalk.yellow(`>>>`)}`, JSON.stringify(data, null, 2)));
+        console.log(chalk.green(`${chalk.yellow(`>>>`)}`, JSON.stringify(res, null, 2)));
       });
     } else {
     console.log(chalk.red(`${chalk.yellow(`>>>`)} There was an error sending the verification email.\n`), JSON.stringify(user.errors, null, 2));

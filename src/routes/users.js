@@ -17,11 +17,18 @@ module.exports = (app) => {
   });
 
   // [GET] Profile
-  app.get('/profile', isAuthenticated, (req, res) => res.render('profile'));
+  app.get('/profile', isAuthenticated, (req, res) => {
+    if (req.user.type === 'individual') res.render('profile-ind')
+    else if (req.user.type === 'organization') res.render('profile-org')
+  });
 
   // [POST] Profile
-  app.post('/profile', (req, res) => {
+  app.post('/profile', async (req, res) => {
     console.log(req.body);
+
+    const update = await models.User.update({ profile: req.body }, { where: { id: req.user.id }});
+    console.log(update);
+
     res.redirect('/profile');
   });
 

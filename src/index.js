@@ -37,7 +37,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser('keyboard cat'));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({ secret: 'super-secret-string', saveUninitialized: true, resave: true, key: 'sid', cookie: { maxAge: 60000 } }));
+app.use(session({ secret: 'super-secret-string', saveUninitialized: true, resave: true, key: 'sid', cookie: { maxAge: 600000 } }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
