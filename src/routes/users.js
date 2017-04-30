@@ -18,8 +18,17 @@ module.exports = (app) => {
 
   // [GET] Profile
   app.get('/profile', isAuthenticated, (req, res) => {
-    if (req.user.type === 'individual') res.render('profile-ind')
-    else if (req.user.type === 'organization') res.render('profile-org')
+    const info = (!req.user.profile) ? 'Please complete your profile to ensure you\'re listed in searches.' : '';
+    const error = (!req.user.subscription) ? 'Subscription Inactive - Please update your subscription on the Account page.' : '';
+
+    if (req.user.type === 'individual') res.render('profile-ind', { info, error });
+    else if (req.user.type === 'organisation') res.render('profile-org', { info, error });
+  });
+
+  // [GET] Edit Profile
+  app.get('/profile/view/:id', isAuthenticated, async (req, res) => {
+    const user = await models.User.findOne({ where: { id: req.params.id }});
+    res.render('profile-view', { user: user.profile })
   });
 
   // [POST] Profile

@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     email: { type: DataTypes.STRING, unique: true, required: true, allowNull: false },
     password: { type: DataTypes.STRING, required: true, allowNull: false },
     verified: { type: DataTypes.BOOLEAN, required: true, allowNull: false, defaultValue: false },
-    type: { type: DataTypes.ENUM('individual', 'organization'), required: true, allowNull: false },
+    type: { type: DataTypes.ENUM('individual', 'organisation'), required: true, allowNull: false },
     profile: { type: DataTypes.JSON },
     subscription: { type: DataTypes.DATE, required: true, defaultValue: null },
     stripe: { type: DataTypes.STRING },

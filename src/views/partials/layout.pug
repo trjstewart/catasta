@@ -24,13 +24,17 @@ html
           a(href='/dashboard').item
             i.search.icon
             | Search for Candidates
+        if (user && user.type === 'individual')
+          a(href=`/profile/view/${user.id}`).item
+            i.user.icon
+            | View Profile
         .right.menu
           if user
             a(href='/profile').item
               i.write.icon
               | Edit Profile
             a(href='/account').item
-              i.user.icon
+              i.archive.icon
               | Account
             a(href='/logout').item
               i.sign.out.icon

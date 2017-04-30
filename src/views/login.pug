@@ -2,43 +2,10 @@ extends partials/layout
 
 block content
   style(type='text/css').
-    body {
-      background-color: #011849;
-    }
-
-    body > .grid {
-      height: 100%;
-    }
-
-    .image {
-      margin-top: -100px;
-    }
-
-    .column {
-      max-width: 450px;
-    }
-
-  script.
-    $(document).ready(function () {
-      $('.ui.form').form({
-        fields: {
-          email: {
-            identifier: 'username',
-            rules: [
-              { type: 'empty', prompt: 'Please enter your e-mail' },
-              { type: 'email', prompt: 'Please enter a valid e-mail' }
-            ]
-          },
-          password: {
-            identifier: 'password',
-            rules: [
-              { type: 'empty', prompt: 'Please enter your password' },
-              { type: 'length[6]', prompt: 'Your password must be at least 6 characters' }
-            ]
-          }
-        }
-      });
-    });
+    body { background-color: #011849; }
+    body > .grid { height: 100%; }
+    .image { margin-top: -100px; }
+    .column { max-width: 450px; }
 
   .ui.middle.aligned.center.aligned.grid
     .column
@@ -53,11 +20,12 @@ block content
             .field.ui.warning.message=info
           if error.length != 0
             .field.ui.negative.message=error
+          .ui.error.message
           .field
             .ui.left.icon.input
               i.user.icon
               if !retryEmail
-                input(type='text', name='username', placeholder='E-mail address')
+                input(type='text', name='username', placeholder='Email address')
               else
                 input(type='text', name='username', value=retryEmail)
           .field
@@ -65,7 +33,28 @@ block content
               i.lock.icon
               input(type='password', name='password', placeholder='Password')
           .ui.fluid.large.sc-gold-button.submit.button Login
-        .ui.error.message
       .ui.message
         | New to SportsConnection?
         a(href='/register')  Register
+
+  script.
+    $(document).ready(function () {
+      $('.ui.form').form({
+        fields: {
+          email: {
+            identifier: 'username',
+            rules: [
+              { type: 'empty', prompt: 'Please enter your Email Adress' },
+              { type: 'email', prompt: 'Please enter a valid Email Address' }
+            ]
+          },
+          password: {
+            identifier: 'password',
+            rules: [
+              { type: 'empty', prompt: 'Please enter your password' },
+              { type: 'length[6]', prompt: 'Your password must be at least 6 characters' }
+            ]
+          }
+        }
+      });
+    });

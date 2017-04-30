@@ -28,8 +28,8 @@ block content
             option(value='male' selected=(user.profile && user.profile.gender === 'male')) Male
             option(value='female' selected=(user.profile && user.profile.gender === 'female')) Female
         .field
-          label Location
-          select.ui.search.dropdown(name='location')
+          label Locations
+          select.ui.search.dropdown(name='locations', multiple='')
             option(value='') Location
             option(value='brisbane-central' selected=(user.profile && user.profile.location === 'brisbane-central')) Central Brisbane
             option(value='brisbane-north' selected=(user.profile && user.profile.location === 'brisbane-north')) North Brisbane
@@ -46,9 +46,9 @@ block content
       h3.ui.dividing.header Additional Information
       .three.fields
         .field
-          label Type
+          label Types
           select.ui.fluid.search.dropdown#type(name='type', multiple='')
-            option(value='') Type
+            option(value='') Types
             option(value='Coach') Coach
             option(value='Umpire/Referee') Umpire/Referee
             option(value='Sports Instructor') Sports Instructor

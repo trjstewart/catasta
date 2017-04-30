@@ -28,9 +28,9 @@ block content
             option(value='male' selected=(user.profile && user.profile.gender === 'male')) Male
             option(value='female' selected=(user.profile && user.profile.gender === 'female')) Female
         .field
-          label Location
-          select.ui.search.dropdown(name='location')
-            option(value='') Location
+          label Locations
+          select.ui.search.dropdown#locations(name='locations', multiple='')
+            option(value='') Locations
             option(value='brisbane-central' selected=(user.profile && user.profile.location === 'brisbane-central')) Central Brisbane
             option(value='brisbane-north' selected=(user.profile && user.profile.location === 'brisbane-north')) North Brisbane
             option(value='brisbane-south' selected=(user.profile && user.profile.location === 'brisbane-south')) South Brisbane
@@ -46,9 +46,9 @@ block content
       h3.ui.dividing.header Additional Information
       .three.fields
         .field
-          label Type
-          select.ui.fluid.search.dropdown#type(name='type', multiple='')
-            option(value='') Type
+          label Types
+          select.ui.fluid.search.dropdown#types(name='types', multiple='')
+            option(value='') Types
             option(value='Coach') Coach
             option(value='Umpire/Referee') Umpire/Referee
             option(value='Sports Instructor') Sports Instructor
@@ -148,7 +148,8 @@ block content
   if user.profile
     script.
       $(document).ready(function () {
-        $('#type').dropdown('set selected', '#{user.profile.type}'.split(','));
+        $('#locations').dropdown('set selected', '#{user.profile.locations}'.split(','));
+        $('#types').dropdown('set selected', '#{user.profile.types}'.split(','));
         $('#sports').dropdown('set selected', '#{user.profile.sports}'.split(','));
       });
 
@@ -157,6 +158,55 @@ block content
       // Enable Calanders
       $('#time-day-start').calendar({ type: 'time' });
       $('#time-day-end').calendar({ type: 'time' });
+
+      // Form Validation
+      $('.ui.form').form({
+        fields: {
+          firstName: {
+            identifier: 'first',
+            rules: [
+              { type: 'empty', prompt: 'Please enter your First Name' }
+            ]
+          },
+          lastName: {
+            identifier: 'last',
+            rules: [
+              { type: 'empty', prompt: 'Please enter your Last Name' }
+            ]
+          },
+
+          gender: {
+            identifier: 'gender',
+            rules: [
+              { type: 'empty', prompt: 'Please select your Gender' }
+            ]
+          },
+          locations: {
+            identifier: 'locations',
+            rules: [
+              { type: 'empty', prompt: 'Please select your Location' }
+            ]
+          },
+          types: {
+            identifier: 'types',
+            rules: [
+              { type: 'empty', prompt: 'Please select the types of roles you\'re suited for' }
+            ]
+          },
+          sports: {
+            identifier: 'sports',
+            rules: [
+              { type: 'empty', prompt: 'Please select the sports you work with' }
+            ]
+          },
+          bluecard: {
+            identifier: 'bluecard',
+            rules: [
+              { type: 'empty', prompt: 'Please select your Bluecard status' }
+            ]
+          },
+        }
+      });
     });
 
     // Time Search Functionality
