@@ -25,19 +25,19 @@ block content
           label Gender
           select.ui.fluid.search.dropdown(name='gender')
             option(value='') Gender
-            option(value='male' selected=(user.profile && user.profile.gender === 'male')) Male
-            option(value='female' selected=(user.profile && user.profile.gender === 'female')) Female
+            option(value='Male' selected=(user.profile && user.profile.gender === 'Male')) Male
+            option(value='Female' selected=(user.profile && user.profile.gender === 'Female')) Female
         .field
           label Locations
           select.ui.search.dropdown#locations(name='locations', multiple='')
             option(value='') Locations
-            option(value='brisbane-central' selected=(user.profile && user.profile.location === 'brisbane-central')) Central Brisbane
-            option(value='brisbane-north' selected=(user.profile && user.profile.location === 'brisbane-north')) North Brisbane
-            option(value='brisbane-south' selected=(user.profile && user.profile.location === 'brisbane-south')) South Brisbane
-            option(value='brisbane-east' selected=(user.profile && user.profile.location === 'brisbane-east')) East Brisbane
-            option(value='brisbane-west' selected=(user.profile && user.profile.location === 'brisbane-west')) West Brisbane
-            option(value='sunshine-coast' selected=(user.profile && user.profile.location === 'sunshine-coast')) Sunshine Coast
-            option(value='gold-coast' selected=(user.profile && user.profile.location === 'gold-coast')) Gold Coast
+            option(value='Brisbane Central' selected=(user.profile && user.profile.location === 'Brisbane Central')) Central Brisbane
+            option(value='Brisbane North' selected=(user.profile && user.profile.location === 'Brisbane North')) North Brisbane
+            option(value='Brisbane South' selected=(user.profile && user.profile.location === 'Brisbane South')) South Brisbane
+            option(value='Brisbane East' selected=(user.profile && user.profile.location === 'Brisbane East')) East Brisbane
+            option(value='Brisbane West' selected=(user.profile && user.profile.location === 'Brisbane West')) West Brisbane
+            option(value='Sunshine Coast' selected=(user.profile && user.profile.location === 'Sunshine Coast')) Sunshine Coast
+            option(value='Gold Coast' selected=(user.profile && user.profile.location === 'Gold Coast')) Gold Coast
         .field
           label Phone
           input(type='text', name='phone', placeholder='Phone', value=(user.profile) ? user.profile.phone: null)
@@ -57,42 +57,42 @@ block content
           label Sports
           select.ui.fluid.search.dropdown#sports(name='sports', multiple='')
             option(value='') Sports
-            option(value='athletics') Athletics
-            option(value='afl') AFL
-            option(value='badminton') Badminton
-            option(value='basketball') Basketball
-            option(value='boxing') Boxing
-            option(value='cricket') Cricket
-            option(value='dance') Dance
-            option(value='fencing') Fencing
-            option(value='football') Football (Soccer)
-            option(value='futsal') Futsal
-            option(value='golf') Golf
-            option(value='gymnastics') Gymnastics
-            option(value='hockey') Hockey
-            option(value='martial Arts') Martial Arts
-            option(value='netball') Netball
-            option(value='personal Trainer') Personal Trainer
-            option(value='pilates') Pilates
-            option(value='rugby League') Rugby League
-            option(value='rugby Union') Rugby Union
-            option(value='running') Running
-            option(value='swimming') Swimming
-            option(value='team Handball') Team Handball
-            option(value='tennis') Tennis
-            option(value='touch Football') Touch Football
-            option(value='triathlon') Triathlon
-            option(value='volleyball') Volleyball
-            option(value='yoga') Yoga
-            option(value='zumba') Zumba
-            option(value='other') Other
+            option(value='Athletics') Athletics
+            option(value='AFL') AFL
+            option(value='Badminton') Badminton
+            option(value='Basketball') Basketball
+            option(value='Boxing') Boxing
+            option(value='Cricket') Cricket
+            option(value='Dance') Dance
+            option(value='Fencing') Fencing
+            option(value='Football (Soccer)') Football (Soccer)
+            option(value='Futsal') Futsal
+            option(value='Golf') Golf
+            option(value='gymGymnasticsnastics') Gymnastics
+            option(value='Hockey') Hockey
+            option(value='Martial Arts') Martial Arts
+            option(value='Netball') Netball
+            option(value='Personal Trainer') Personal Trainer
+            option(value='Pilates') Pilates
+            option(value='Rugby League') Rugby League
+            option(value='Rugby Union') Rugby Union
+            option(value='Running') Running
+            option(value='Swimming') Swimming
+            option(value='Team Handball') Team Handball
+            option(value='Tennis') Tennis
+            option(value='Touch Football') Touch Football
+            option(value='Triathlon') Triathlon
+            option(value='Volleyball') Volleyball
+            option(value='Yoga') Yoga
+            option(value='Zumba') Zumba
+            option(value='Other') Other
         .field
           label Blue Card Holder
           select.ui.dropdown(name='bluecard')
             option(value='') Blue Card Holder
-            option(value='yes' selected=(user.profile && user.profile.bluecard === 'yes')) Yes
-            option(value='pending' selected=(user.profile && user.profile.bluecard === 'pending')) Pending
-            option(value='no' selected=(user.profile && user.profile.bluecard === 'no')) No
+            option(value='Yes' selected=(user.profile && user.profile.bluecard === 'Yes')) Yes
+            option(value='Pending' selected=(user.profile && user.profile.bluecard === 'Pending')) Pending
+            option(value='No' selected=(user.profile && user.profile.bluecard === 'No')) No
       .field
         label Experience and Qualifications
         textarea(name='experience', placeholder='Experience and Qualifications')=(user.profile) ? user.profile.experience: null

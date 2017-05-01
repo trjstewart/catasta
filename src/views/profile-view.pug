@@ -8,120 +8,42 @@ block content
       .two.fields
         .field
           label First Name
-          span=user.first
+          span=profile.first
         .field
           label Last Name
-          span=user.last
+          span=profile.last
       .two.fields
         .field
           label Gender
-          span=user.gender
+          span=profile.gender
         .field
           label Phone
-          span=user.phone
+          span=profile.phone
       .field
         label Locations
-        span=user.locations.join(', ')
+        span=profile.locations.join(', ')
       
       //- Additional Information
       h3.ui.dividing.header Additional Information
       .three.fields
         .field
           label Types
-          select.ui.fluid.search.dropdown#types(name='types', multiple='')
-            option(value='') Types
-            option(value='Coach') Coach
-            option(value='Umpire/Referee') Umpire/Referee
-            option(value='Sports Instructor') Sports Instructor
-            option(value='Sports Medicine') Sports Medicine
+          span=profile.types.join(', ')
         .field
           label Sports
-          select.ui.fluid.search.dropdown#sports(name='sports', multiple='')
-            option(value='') Sports
-            option(value='athletics') Athletics
-            option(value='afl') AFL
-            option(value='badminton') Badminton
-            option(value='basketball') Basketball
-            option(value='boxing') Boxing
-            option(value='cricket') Cricket
-            option(value='dance') Dance
-            option(value='fencing') Fencing
-            option(value='football') Football (Soccer)
-            option(value='futsal') Futsal
-            option(value='golf') Golf
-            option(value='gymnastics') Gymnastics
-            option(value='hockey') Hockey
-            option(value='martial Arts') Martial Arts
-            option(value='netball') Netball
-            option(value='personal Trainer') Personal Trainer
-            option(value='pilates') Pilates
-            option(value='rugby League') Rugby League
-            option(value='rugby Union') Rugby Union
-            option(value='running') Running
-            option(value='swimming') Swimming
-            option(value='team Handball') Team Handball
-            option(value='tennis') Tennis
-            option(value='touch Football') Touch Football
-            option(value='triathlon') Triathlon
-            option(value='volleyball') Volleyball
-            option(value='yoga') Yoga
-            option(value='zumba') Zumba
-            option(value='other') Other
+          span=profile.sports.join(', ')
         .field
           label Blue Card Holder
-          select.ui.dropdown(name='bluecard')
-            option(value='') Blue Card Holder
-            option(value='yes' selected=(user.profile && user.profile.bluecard === 'yes')) Yes
-            option(value='pending' selected=(user.profile && user.profile.bluecard === 'pending')) Pending
-            option(value='no' selected=(user.profile && user.profile.bluecard === 'no')) No
+          span=profile.bluecard
       .field
         label Experience and Qualifications
-        textarea(name='experience', placeholder='Experience and Qualifications')=(user.profile) ? user.profile.experience: null
+        span=profile.experience
       
-      //- Available Times Entry
+      //- Available Times
       h3.ui.dividing.header Available Times
-      #day-time-add
-        input#daytimes(type='hidden', name='daytimes')
-        .fields
-          .five.wide.field
-            label Day
-            select.ui.search.dropdown#time-day-day
-              option(value='') Day
-              option(value='Monday') Monday
-              option(value='Tuesday') Tuesday
-              option(value='Wednesday') Wednesday
-              option(value='Thursday') Thursday
-              option(value='Friday') Friday
-              option(value='Saturday') Saturday
-              option(value='Sunday') Sunday
-          .four.wide.field
-            label Start
-            .ui.calendar#time-day-start
-              .ui.input.left.icon
-                i.time.icon
-                |
-                input(type='text', placeholder='Time')
-          .four.wide.field
-            label End
-            .ui.calendar#time-day-end
-              .ui.input.left.icon
-                i.time.icon
-                |
-                input(type='text', placeholder='Time')
-          .three.wide.field
-            label &nbsp;
-            button.ui.labeled.icon.button.green.fluid(type="button", onclick="addTimeSlot()")
-              i.plus.icon
-              | Add
-      .field
-      .ui.negative.message#time-day-error(hidden=true)
-        p Please select a day, start, and end to add to your search.
-      table.ui.blue.table#day-time-table(hidden=true)
+      table.ui.blue.table#day-time-table
         thead
           tr
             th.three.wide Day
             th.twelve.wide Available
         tbody
-      .field
-        button.ui.button.blue.fluid Save
-      .ui.error.message

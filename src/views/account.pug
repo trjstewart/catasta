@@ -2,6 +2,14 @@ extends partials/layout
 
 block content
   .ui.text.container
+    //- Messages
+    if success.length != 0
+      .field.ui.positive.message=success
+    if info.length != 0
+      .field.ui.warning.message=info
+    if error.length != 0
+      .field.ui.negative.message=error
+
     //- Change Password
     h3.ui.dividing.header Change Password
     form.ui.form#password(method='post' action='')

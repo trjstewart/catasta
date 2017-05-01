@@ -22,125 +22,26 @@ block content
           input(type='text', name='contact', placeholder='Contact Name', value=(user.profile) ? user.profile.contact: null)
       .three.fields
         .field
-          label Gender
-          select.ui.fluid.search.dropdown(name='gender')
-            option(value='') Gender
-            option(value='male' selected=(user.profile && user.profile.gender === 'male')) Male
-            option(value='female' selected=(user.profile && user.profile.gender === 'female')) Female
-        .field
-          label Locations
-          select.ui.search.dropdown(name='locations', multiple='')
-            option(value='') Location
-            option(value='brisbane-central' selected=(user.profile && user.profile.location === 'brisbane-central')) Central Brisbane
-            option(value='brisbane-north' selected=(user.profile && user.profile.location === 'brisbane-north')) North Brisbane
-            option(value='brisbane-south' selected=(user.profile && user.profile.location === 'brisbane-south')) South Brisbane
-            option(value='brisbane-east' selected=(user.profile && user.profile.location === 'brisbane-east')) East Brisbane
-            option(value='brisbane-west' selected=(user.profile && user.profile.location === 'brisbane-west')) West Brisbane
-            option(value='sunshine-coast' selected=(user.profile && user.profile.location === 'sunshine-coast')) Sunshine Coast
-            option(value='gold-coast' selected=(user.profile && user.profile.location === 'gold-coast')) Gold Coast
-        .field
           label Phone
           input(type='text', name='phone', placeholder='Phone', value=(user.profile) ? user.profile.phone: null)
-      
-      //- Additional Information Entry
-      h3.ui.dividing.header Additional Information
-      .three.fields
         .field
-          label Types
-          select.ui.fluid.search.dropdown#type(name='type', multiple='')
+          label Type
+          select.ui.fluid.search.dropdown(name='type')
             option(value='') Types
-            option(value='Coach') Coach
-            option(value='Umpire/Referee') Umpire/Referee
-            option(value='Sports Instructor') Sports Instructor
-            option(value='Sports Medicine') Sports Medicine
+            option(value='School' selected=(user.profile && user.profile.type === 'School')) School
+            option(value='Sporting Club' selected=(user.profile && user.profile.type === 'Sporting Club')) Sporting Club
+            option(value='Organisation' selected=(user.profile && user.profile.type === 'Organisation')) Organisation
         .field
-          label Sports
-          select.ui.fluid.search.dropdown#sports(name='sports', multiple='')
-            option(value='') Sports
-            option(value='athletics') Athletics
-            option(value='afl') AFL
-            option(value='badminton') Badminton
-            option(value='basketball') Basketball
-            option(value='boxing') Boxing
-            option(value='cricket') Cricket
-            option(value='dance') Dance
-            option(value='fencing') Fencing
-            option(value='football') Football (Soccer)
-            option(value='futsal') Futsal
-            option(value='golf') Golf
-            option(value='gymnastics') Gymnastics
-            option(value='hockey') Hockey
-            option(value='martial Arts') Martial Arts
-            option(value='netball') Netball
-            option(value='personal Trainer') Personal Trainer
-            option(value='pilates') Pilates
-            option(value='rugby League') Rugby League
-            option(value='rugby Union') Rugby Union
-            option(value='running') Running
-            option(value='swimming') Swimming
-            option(value='team Handball') Team Handball
-            option(value='tennis') Tennis
-            option(value='touch Football') Touch Football
-            option(value='triathlon') Triathlon
-            option(value='volleyball') Volleyball
-            option(value='yoga') Yoga
-            option(value='zumba') Zumba
-            option(value='other') Other
-        .field
-          label Blue Card Holder
-          select.ui.dropdown(name='bluecard')
-            option(value='') Blue Card Holder
-            option(value='yes' selected=(user.profile && user.profile.bluecard === 'yes')) Yes
-            option(value='pending' selected=(user.profile && user.profile.bluecard === 'pending')) Pending
-            option(value='no' selected=(user.profile && user.profile.bluecard === 'no')) No
-      .field
-        label Experience and Qualifications
-        textarea(name='experience', placeholder='Experience and Qualifications')=(user.profile) ? user.profile.experience: null
-      
-      //- Available Times Entry
-      h3.ui.dividing.header Available Times
-      #day-time-add
-        input#daytimes(type='hidden', name='daytimes')
-        .fields
-          .five.wide.field
-            label Day
-            select.ui.search.dropdown#time-day-day
-              option(value='') Day
-              option(value='Monday') Monday
-              option(value='Tuesday') Tuesday
-              option(value='Wednesday') Wednesday
-              option(value='Thursday') Thursday
-              option(value='Friday') Friday
-              option(value='Saturday') Saturday
-              option(value='Sunday') Sunday
-          .four.wide.field
-            label Start
-            .ui.calendar#time-day-start
-              .ui.input.left.icon
-                i.time.icon
-                |
-                input(type='text', placeholder='Time')
-          .four.wide.field
-            label End
-            .ui.calendar#time-day-end
-              .ui.input.left.icon
-                i.time.icon
-                |
-                input(type='text', placeholder='Time')
-          .three.wide.field
-            label &nbsp;
-            button.ui.labeled.icon.button.green.fluid(type="button", onclick="addTimeSlot()")
-              i.plus.icon
-              | Add
-      .field
-      .ui.negative.message#time-day-error(hidden=true)
-        p Please select a day, start, and end to add to your search.
-      table.ui.blue.table#day-time-table(hidden=true)
-        thead
-          tr
-            th.three.wide Day
-            th.twelve.wide Available
-        tbody
+          label Locations
+          select.ui.search.dropdown#locations(name='locations', multiple='')
+            option(value='') Locations
+            option(value='Brisbane Central' selected=(user.profile && user.profile.location === 'Brisbane Central')) Central Brisbane
+            option(value='Brisbane North' selected=(user.profile && user.profile.location === 'Brisbane North')) North Brisbane
+            option(value='Brisbane South' selected=(user.profile && user.profile.location === 'Brisbane South')) South Brisbane
+            option(value='Brisbane East' selected=(user.profile && user.profile.location === 'Brisbane East')) East Brisbane
+            option(value='Brisbane West' selected=(user.profile && user.profile.location === 'Brisbane West')) West Brisbane
+            option(value='Sunshine Coast' selected=(user.profile && user.profile.location === 'Sunshine Coast')) Sunshine Coast
+            option(value='Gold Coast' selected=(user.profile && user.profile.location === 'Gold Coast')) Gold Coast
       .field
         button.ui.button.blue.fluid Save
       .ui.error.message
@@ -148,50 +49,38 @@ block content
   if user.profile
     script.
       $(document).ready(function () {
-        $('#type').dropdown('set selected', '#{user.profile.type}'.split(','));
-        $('#sports').dropdown('set selected', '#{user.profile.sports}'.split(','));
+        $('#locations').dropdown('set selected', '#{user.profile.locations}'.split(','));
       });
 
   script.
     $(document).ready(function () {
-      // Enable Calanders
-      $('#time-day-start').calendar({ type: 'time' });
-      $('#time-day-end').calendar({ type: 'time' });
-    });
-
-    // Time Search Functionality
-    var dayTimes = { Monday: [], Tuesday: [], Wednesday: [], Thursday: [], Friday: [], Saturday: [], Sunday: [] };
-
-    function addTimeSlot() {
-      var day = $('#time-day-day').val();
-      var start = $('#time-day-start input').val();
-      var end = $('#time-day-end input').val();
-
-      if (day !== '' && start !== '' && end !== '') {
-        // Could add some validation here? : new Date(2010, 12, 21, 9, 30, 0, 0), // today 9:30:00:000
-        // Could also write logic to add times for an existing day to the existing row rather than adding a new row.
-
-        // Add to the Table.
-        var newRow = '<tr><td>' + day + '</td><td>' + start + ' - ' + end + '</td></tr>';
-        $('#day-time-table > tbody:last-child').append(newRow);
-
-        // Add to the DataStore.
-        dayTimes[day].push(start + ' - ' + end);
-
-        // Hide Error.
-        $('#time-day-error').attr('hidden', true);
-
-        // Show Table.
-        $('#day-time-table').attr('hidden', false);
-      } else {
-        $('#time-day-error').attr('hidden', false);
-      }
-    }
-
-    // Search Form Submit
-    $('#profile').submit(function(form) {
-      //- form.preventDefault(); // Debugging
-      
-      // Add the dayTimes data to the form before it's submitted.
-      $('#daytimes').val(JSON.stringify(dayTimes));
+      // Form Validation
+      $('.ui.form').form({
+        fields: {
+          name: {
+            identifier: 'name',
+            rules: [
+              { type: 'empty', prompt: 'Please enter your Organisations Name' }
+            ]
+          },
+          contact: {
+            identifier: 'contact',
+            rules: [
+              { type: 'empty', prompt: 'Please enter your Organisations Contact Name' }
+            ]
+          },
+          type: {
+            identifier: 'type',
+            rules: [
+              { type: 'empty', prompt: 'Please select your Organisations Type' }
+            ]
+          },
+          locations: {
+            identifier: 'locations',
+            rules: [
+              { type: 'empty', prompt: 'Please select your Organisations Locations' }
+            ]
+          },
+        }
+      });
     });

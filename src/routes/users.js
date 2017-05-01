@@ -18,7 +18,7 @@ module.exports = (app) => {
 
   // [GET] Profile
   app.get('/profile', isAuthenticated, (req, res) => {
-    const info = (!req.user.profile) ? 'Please complete your profile to ensure you\'re listed in searches.' : '';
+    const info = (req.user.type === 'individual' && !req.user.profile) ? 'Please complete your profile to ensure you\'re listed in searches.' : '';
     const error = (!req.user.subscription) ? 'Subscription Inactive - Please update your subscription on the Account page.' : '';
 
     if (req.user.type === 'individual') res.render('profile-ind', { info, error });
@@ -28,7 +28,7 @@ module.exports = (app) => {
   // [GET] Edit Profile
   app.get('/profile/view/:id', isAuthenticated, async (req, res) => {
     const user = await models.User.findOne({ where: { id: req.params.id }});
-    res.render('profile-view', { user: user.profile })
+    res.render('profile-view', { profile: user.profile })
   });
 
   // [POST] Profile
@@ -62,10 +62,20 @@ module.exports = (app) => {
       }
     }
   });
-};
 
-// metadata: {
-//   verifyEmail: {
-//     token: req.params.token
-//   }
-// }
+  // [POST] Change Password
+  app.get('/change-password', async (req, res) => {
+    console.log(req.body)
+
+
+
+
+
+    res.redirect('/account');
+  });
+
+  // [GET] Forgot Password
+
+
+  // Subscription?
+};

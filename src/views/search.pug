@@ -107,7 +107,7 @@ block content
             th.two.wide Delete
         tbody
       .field
-        button.ui.button.blue.fluid(type='search') Search
+        button.ui.button.blue.fluid(type='search' disabled=(user.subscription == null || +new Date()>user.subscription)) Search
       .ui.error.message
 
   script.
