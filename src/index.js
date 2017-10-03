@@ -23,6 +23,8 @@ import { name } from '../package.json';
 import models from './lib/db/models';
 models.sequelize.sync({ force: false });
 
+// This is a super importanmt change with a typo...
+
 // Begin Application
 const app = express();
 
